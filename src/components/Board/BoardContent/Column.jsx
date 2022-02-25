@@ -26,9 +26,11 @@ const Column = ({ index, canDragColumns, column, columnName, ...props }) => {
             <div>{columnName}</div>
             {canDragColumns && (
               <ActionsWrapper>
-                <span onClick={() => removeItem("column", columnName)}>
-                  <IconClose />
-                </span>
+                {columnName !== "backlog" && (
+                  <span onClick={() => removeItem("column", columnName)}>
+                    <IconClose />
+                  </span>
+                )}
                 <IconGrip />
               </ActionsWrapper>
             )}
@@ -74,7 +76,7 @@ const ColHeaderWrapper = styled.div`
     font-size: 8px;
     height: 20px;
     justify-content: center;
-    margin-right: 4px;
+    margin-right: 10px;
     width: 20px;
 
     svg {

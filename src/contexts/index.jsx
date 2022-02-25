@@ -7,6 +7,7 @@ import {
   useState,
 } from "react";
 
+import { DEMO_STATE } from "utils/constants";
 import { createNewItem } from "utils/helpers";
 import {
   getElementFromLocalStorage,
@@ -20,7 +21,7 @@ const BoardContext = createContext({
 
 export const BoardProvider = ({ children }) => {
   const [columns, setColumns] = useState(
-    getElementFromLocalStorage("board") || [{ backlog: { tickets: [] } }]
+    getElementFromLocalStorage("board") || DEMO_STATE
   );
   const [selectedTicket, setSelectedTicket] = useState(null);
   const [canDragColumns, setCanDragColumns] = useState(false);
@@ -94,6 +95,10 @@ export const BoardProvider = ({ children }) => {
       }
 
       if (type === "column") {
+        if (columnName === "backlog") {
+          return;
+        }
+
         const filteredBoard = [...columns].filter(
           (column) => !Object.keys(column).includes(columnName)
         );

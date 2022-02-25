@@ -74,7 +74,7 @@ const MenuWrapper = styled.div`
   background-color: white;
   border-radius: 0 20px 20px 0;
   box-shadow: 0 1px 60px 0 rgb(69 129 192 / 10%);
-  color: #365ed2;
+
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -89,6 +89,8 @@ const MenuWrapper = styled.div`
 
   a {
     color: #365ed2;
+    font-family: Noah Bold;
+    font-weight: bolder;
     text-decoration: none;
   }
 `;
