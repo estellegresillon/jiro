@@ -1,19 +1,52 @@
+import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { useBoardContext } from "contexts";
+import { useOnClickOutside } from "hooks/useOnClickOutside";
 
-const Menu = ({ menuRef, onClose }) => {
+import SmallModal from "../SmallModal";
+
+const Menu = () => {
   const { createElement } = useBoardContext();
 
-  const onClick = () => {
-    createElement("ticket");
-  };
+  const createTicketRef = useRef();
+  const createColumnRef = useRef();
+
+  const [isCreateTicketOpen, setCreateTicketOpen] = useState(false);
+  const [isCreateColumnOpen, setCreateColumnOpen] = useState(false);
+
+  useOnClickOutside(createTicketRef, () => setCreateTicketOpen(false));
+  useOnClickOutside(createColumnRef, () => setCreateColumnOpen(false));
 
   return (
-    <MenuWrapper ref={menuRef}>
-      <Item onClick={onClose}>close</Item>
-      <Item>Ticket</Item>
-      <Item onClick={onClick}>Create</Item>
+    <MenuWrapper>
+      <Item>
+        <Link to="/">Jiro</Link>
+      </Item>
+      <Item>+ New Sprint</Item>
+      <Item onClick={() => setCreateTicketOpen(true)}>
+        <div>+ Ticket</div>
+        {isCreateTicketOpen && (
+          <SmallModal
+            modalRef={createTicketRef}
+            name="ticket"
+            onValidate={createElement}
+            onClose={() => setCreateTicketOpen(false)}
+          />
+        )}
+      </Item>
+      <Item onClick={() => setCreateColumnOpen(true)}>
+        <div>+ Column</div>
+        {isCreateColumnOpen && (
+          <SmallModal
+            modalRef={createColumnRef}
+            name="column"
+            onValidate={createElement}
+            onClose={() => setCreateColumnOpen(false)}
+          />
+        )}
+      </Item>
     </MenuWrapper>
   );
 };
@@ -21,26 +54,35 @@ const Menu = ({ menuRef, onClose }) => {
 export default Menu;
 
 const MenuWrapper = styled.div`
+  align-items: center;
   background-color: white;
-  border-radius: 5px;
-  box-shadow: 0 1px 66.5px 0 rgb(0 0 0 / 18%);
+  box-shadow: 0 1px 80px 0 rgb(0 0 0 / 10%);
   display: flex;
   flex-direction: column;
-  max-height: 500px;
-  position: absolute;
-  overflow: scroll;
-  top: 40px;
-  width: 250px;
-  z-index: 1;
+  height: 100%;
+  justify-content: center;
+  width: 200px;
+
+  a {
+    color: black;
+    text-decoration: none;
+  }
 `;
 
 const Item = styled.div`
+  align-items: center;
+  border-radius: 10px;
   color: black;
-  margin: 5px;
-  padding: 30px;
+  cursor: pointer;
+  display: flex;
+  height: 70px;
+  justify-content: center;
+  margin: 10px;
+  position: relative;
   text-align: center;
+  width: calc(100% - 20px);
 
   &:hover {
-    background-color: #e9e9e9;
+    background-color: #f7f7f7;
   }
 `;

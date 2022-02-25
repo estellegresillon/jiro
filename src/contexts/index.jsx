@@ -23,19 +23,20 @@ export const BoardProvider = ({ children }) => {
     getElementFromLocalStorage("board") || [{ backlog: { tickets: [] } }]
   );
   const [selectedTicket, setSelectedTicket] = useState(null);
+  const [canDragColumns, setCanDragColumns] = useState(false);
 
   const selectTicket = useCallback((item) => {
     setSelectedTicket(item);
   }, []);
 
   const createElement = useCallback(
-    (type) => {
+    (type, elementName) => {
       if (type === "ticket") {
         const newTicket = createNewItem({
           createdAt: "today",
-          descrtion: "description",
+          description: "description",
           status: "backlog",
-          title: type,
+          title: elementName,
         });
 
         const status = "backlog";
@@ -52,10 +53,8 @@ export const BoardProvider = ({ children }) => {
       }
 
       if (type === "column") {
-        const newColumn = "todo";
-
         const columnExists = columns.find((column) =>
-          Object.keys(column).includes(newColumn)
+          Object.keys(column).includes(elementName)
         );
 
         if (columnExists) {
@@ -63,7 +62,7 @@ export const BoardProvider = ({ children }) => {
         }
 
         const newColObj = {
-          todo: {
+          [elementName]: {
             tickets: [],
           },
         };
@@ -76,16 +75,34 @@ export const BoardProvider = ({ children }) => {
     [columns]
   );
 
-  // const removeTicket = useCallback(
-  //   (item) => {
-  //     const filteredTickets = [...tickets].filter((ticket) => {
-  //       return ticket.id !== item.id;
-  //     });
+  const removeItem = useCallback(
+    (type, columnName, itemId) => {
+      if (type === "ticket") {
+        const newBoard = [...columns];
 
-  //     // setTickets(filteredTickets);
-  //   },
-  //   [tickets]
-  // );
+        const parentCol = newBoard.find((column) =>
+          Object.keys(column).includes(columnName)
+        );
+
+        const updatedColTickets = parentCol[columnName].tickets;
+        const colWithoutTicket = updatedColTickets.filter(
+          (ticket) => ticket.id !== itemId
+        );
+
+        parentCol[columnName].tickets = colWithoutTicket;
+        setColumns(newBoard);
+      }
+
+      if (type === "column") {
+        const filteredBoard = [...columns].filter(
+          (column) => !Object.keys(column).includes(columnName)
+        );
+
+        setColumns(filteredBoard);
+      }
+    },
+    [columns]
+  );
 
   const updateElements = useCallback((elements) => {
     setColumns(elements);
@@ -99,13 +116,24 @@ export const BoardProvider = ({ children }) => {
 
   const value = useMemo(
     () => ({
+      canDragColumns,
       columns,
       createElement,
+      removeItem,
+      selectTicket,
+      selectedTicket,
+      setCanDragColumns,
+      updateElements,
+    }),
+    [
+      canDragColumns,
+      columns,
+      createElement,
+      removeItem,
       selectTicket,
       selectedTicket,
       updateElements,
-    }),
-    [columns, createElement, selectTicket, selectedTicket, updateElements]
+    ]
   );
 
   return (
