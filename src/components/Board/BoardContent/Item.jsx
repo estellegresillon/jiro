@@ -18,9 +18,14 @@ const Item = ({ canDragColumns, columnName, index, ticket }) => {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          <div onClick={() => removeItem("ticket", columnName, ticket.id)}>
-            x
-          </div>
+          {canDragColumns && (
+            <div
+              className="remove-ticket"
+              onClick={() => removeItem("ticket", columnName, ticket.id)}
+            >
+              x
+            </div>
+          )}
           <div>{ticket.title}</div>
         </ItemWrapper>
       )}
@@ -36,7 +41,7 @@ const ItemWrapper = styled.div`
   padding: 10px;
   margin: 15px;
 
-  > div:first-child {
+  .remove-ticket {
     align-items: center;
     background-color: #e0dede;
     border-radius: 50%;

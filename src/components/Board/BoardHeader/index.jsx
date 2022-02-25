@@ -11,7 +11,7 @@ const BoardHeader = () => {
         <div>Sprint #89</div>
         <div onClick={() => setCanDragColumns(!canDragColumns)}>
           <div>
-            Move columns : <span>{canDragColumns ? "yes" : "no"}</span>
+            Update board : <span>{canDragColumns ? "yes" : "no"}</span>
           </div>
         </div>
       </ContentWrapper>
