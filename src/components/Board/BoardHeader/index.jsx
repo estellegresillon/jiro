@@ -7,14 +7,20 @@ const BoardHeader = () => {
 
   return (
     <BoardHeaderWrapper>
-      <ContentWrapper>
-        <div>Sprint #89</div>
-        <div onClick={() => setCanDragColumns(!canDragColumns)}>
-          <div>
-            Update board : <span>{canDragColumns ? "yes" : "no"}</span>
-          </div>
-        </div>
-      </ContentWrapper>
+      <HeaderCard>
+        <CardContent>
+          <h1>Sprint #89</h1>
+          <ActionWrapper>
+            <div>{canDragColumns ? "Managing Board" : "Manage Board"}</div>
+            <ToggleButton
+              onClick={() => setCanDragColumns(!canDragColumns)}
+              $canDragColumns={canDragColumns}
+            >
+              <div className="toggle-button" />
+            </ToggleButton>
+          </ActionWrapper>
+        </CardContent>
+      </HeaderCard>
     </BoardHeaderWrapper>
   );
 };
@@ -25,22 +31,62 @@ const BoardHeaderWrapper = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
-  height: 190px;
-  width: calc(100% - 100px);
-  padding: 50px;
+  height: 30vh;
+  width: 100%;
 `;
 
-const ContentWrapper = styled.div`
+const HeaderCard = styled.div`
   align-items: flex-start;
   background-color: white;
   border-radius: 25px;
-  box-shadow: 0 1px 80px 0 rgb(0 0 0 / 15%);
+  box-shadow: 0 1px 60px 0 rgb(69 129 192 / 10%);
   display: flex;
-  flex-direction: column;
-  font-weight: bolder;
   justify-content: center;
-  height: calc(100% - 100px);
-  padding: 50px;
+  height: 60%;
   position: relative;
-  width: calc(100% - 100px); ;
+  width: 90%;
+`;
+
+const CardContent = styled.div`
+  align-items: flex-start;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  width: 90%;
+
+  h1 {
+    font-family: Noah Bold;
+    font-weight: bolder;
+    margin: 10px 0;
+  }
+`;
+
+const ActionWrapper = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 175px;
+`;
+
+const ToggleButton = styled.div`
+  align-items: center;
+  background-color: #edf0fa;
+  border-radius: 25px;
+  cursor: pointer;
+  display: flex;
+  height: 26px;
+  justify-content: flex-start;
+  width: 50px;
+
+  .toggle-button {
+    background-color: ${({ $canDragColumns }) =>
+      $canDragColumns ? "#59b1fc" : "#f6f8ff"};
+    border-radius: 50%;
+    height: 20px;
+    margin: 3px;
+    margin-left: ${({ $canDragColumns }) => ($canDragColumns ? "25px" : "3px")};
+    transition: 1s all ease;
+    width: 20px;
+  }
 `;

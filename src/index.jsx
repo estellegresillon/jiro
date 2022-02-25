@@ -11,7 +11,15 @@ import { BoardProvider } from "contexts";
 
 const AppWrapper = styled.div`
   align-items: center;
-  background-color: #fafafa;
+  background: white;
+  background: linear-gradient(
+    324deg,
+    rgba(231, 240, 252, 1) 0%,
+    rgba(255, 255, 255, 1) 29%,
+    rgba(255, 255, 255, 1) 51%,
+    rgba(255, 255, 255, 1) 72%,
+    rgba(254, 236, 253, 1) 100%
+  );
   display: flex;
   justify-content: center;
   height: 100vh;

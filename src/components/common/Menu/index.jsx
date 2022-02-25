@@ -1,49 +1,65 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+import IconPlus from "components/common/IconPlus";
 import { useBoardContext } from "contexts";
-import { useOnClickOutside } from "hooks/useOnClickOutside";
 
 import SmallModal from "../SmallModal";
 
 const Menu = () => {
   const { createElement } = useBoardContext();
 
-  const createTicketRef = useRef();
-  const createColumnRef = useRef();
-
   const [isCreateTicketOpen, setCreateTicketOpen] = useState(false);
   const [isCreateColumnOpen, setCreateColumnOpen] = useState(false);
 
-  useOnClickOutside(createTicketRef, () => setCreateTicketOpen(false));
-  useOnClickOutside(createColumnRef, () => setCreateColumnOpen(false));
+  const handleCreateTicketOpen = (boolean) => {
+    setCreateTicketOpen(boolean);
+    if (boolean) {
+      setCreateColumnOpen(false);
+    }
+  };
+
+  const handleCreateColumnOpen = (boolean) => {
+    setCreateColumnOpen(boolean);
+    if (boolean) {
+      setCreateTicketOpen(false);
+    }
+  };
 
   return (
     <MenuWrapper>
       <Item>
-        <Link to="/">Jiro</Link>
+        <ItemContent>
+          <Link to="/">Jiro</Link>
+        </ItemContent>
       </Item>
-      <Item>+ New Sprint</Item>
-      <Item onClick={() => setCreateTicketOpen(true)}>
-        <div>+ Ticket</div>
+      {/* <Item>
+        <ButtonNewSprint>
+          <IconPlus /> New Sprint
+        </ButtonNewSprint>
+      </Item> */}
+      <Item>
+        <ItemContent onClick={() => handleCreateTicketOpen(true)}>
+          <IconPlus /> Ticket
+        </ItemContent>
         {isCreateTicketOpen && (
           <SmallModal
-            modalRef={createTicketRef}
             name="ticket"
             onValidate={createElement}
-            onClose={() => setCreateTicketOpen(false)}
+            onClose={() => handleCreateTicketOpen(false)}
           />
         )}
       </Item>
-      <Item onClick={() => setCreateColumnOpen(true)}>
-        <div>+ Column</div>
+      <Item>
+        <ItemContent onClick={() => handleCreateColumnOpen(true)}>
+          <IconPlus /> Column
+        </ItemContent>
         {isCreateColumnOpen && (
           <SmallModal
-            modalRef={createColumnRef}
             name="column"
             onValidate={createElement}
-            onClose={() => setCreateColumnOpen(false)}
+            onClose={() => handleCreateColumnOpen(false)}
           />
         )}
       </Item>
@@ -56,33 +72,58 @@ export default Menu;
 const MenuWrapper = styled.div`
   align-items: center;
   background-color: white;
-  box-shadow: 0 1px 80px 0 rgb(0 0 0 / 10%);
+  border-radius: 0 20px 20px 0;
+  box-shadow: 0 1px 60px 0 rgb(69 129 192 / 10%);
+  color: #365ed2;
   display: flex;
   flex-direction: column;
   height: 100%;
   justify-content: center;
-  width: 200px;
+  width: 150px;
+
+  svg {
+    height: 15px;
+    margin-right: 5px;
+    width: 15px;
+  }
 
   a {
-    color: black;
+    color: #365ed2;
     text-decoration: none;
   }
 `;
 
 const Item = styled.div`
-  align-items: center;
   border-radius: 10px;
-  color: black;
   cursor: pointer;
-  display: flex;
-  height: 70px;
-  justify-content: center;
-  margin: 10px;
+  height: 50px;
+  margin: 10px 20px;
   position: relative;
   text-align: center;
-  width: calc(100% - 20px);
+  width: calc(100% - 40px);
 
   &:hover {
-    background-color: #f7f7f7;
+    background-color: #f7f9fe;
+    color: #2145ae;
   }
 `;
+
+const ItemContent = styled.div`
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  white-space: nowrap;
+  width: 100%;
+`;
+
+// const ButtonNewSprint = styled(ItemContent)`
+//   align-items: center;
+//   background: #365ed3;
+//   border-radius: 10px;
+//   color: white;
+
+//   &:hover {
+//     background-color: #2145ae;
+//   }
+// `;

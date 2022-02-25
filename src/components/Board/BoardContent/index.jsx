@@ -86,25 +86,30 @@ const BoardContent = () => {
 export default BoardContent;
 
 const BoardWrapper = styled.div`
-  align-items: center;
+  align-items: flex-start;
   display: flex;
   justify-content: center;
-  height: calc(100% - 250px);
+  height: 70vh;
   position: relative;
   width: 100%;
 `;
 
 const ColumnWrapper = styled.div`
   display: flex;
-  height: calc(100% - 50px);
-  margin: 0 30px 50px 30px;
-  width: 100%;
+  height: 90%;
+  width: 90%;
 
   > div {
     background-color: white;
     border-radius: 25px;
-    box-shadow: 0 1px 60px 0 rgb(0 0 0 / 10%);
-    margin: 0 20px;
+    box-shadow: 0 1px 60px 0 rgb(69 129 192 / 10%);
+    height: 100%;
+    margin-left: 20px;
+    overflow: hidden;
     width: 100%;
+
+    &:first-child {
+      margin-left: 0;
+    }
   }
 `;

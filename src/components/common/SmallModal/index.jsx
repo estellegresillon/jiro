@@ -1,25 +1,31 @@
 import { useState } from "react";
 import styled from "styled-components";
 
+import IconClose from "components/common/IconClose";
+
 import Input from "../Input";
 
-const SmallModal = ({ modalRef, name, onValidate, onClose }) => {
+const SmallModal = ({ name, onValidate, onClose }) => {
   const [value, setValue] = useState("");
 
   const onClick = () => {
     onValidate(name, value);
     setValue("");
+    onClose();
   };
 
   return (
-    <SmallModalWrapper ref={modalRef}>
-      <Item onClick={onClose}>close</Item>
+    <SmallModalWrapper>
+      <CloseButton onClick={onClose}>
+        <IconClose />
+      </CloseButton>
       <Input
         name={name}
-        value={value}
         onChange={(event) => setValue(event.target.value)}
+        placeholder={`Enter a name for your ${name}`}
+        value={value}
       />
-      <Item onClick={onClick}>Create</Item>
+      <CreateButton onClick={onClick}>Create</CreateButton>
     </SmallModalWrapper>
   );
 };
@@ -27,27 +33,47 @@ const SmallModal = ({ modalRef, name, onValidate, onClose }) => {
 export default SmallModal;
 
 const SmallModalWrapper = styled.div`
+  align-items: flex-start;
   background-color: white;
-  border-radius: 5px;
-  box-shadow: 0 1px 66.5px 0 rgb(0 0 0 / 18%);
+  border-radius: 15px;
+  box-shadow: 0 1px 60px 0 rgb(69 129 192 / 15%);
   display: flex;
   flex-direction: column;
-  max-height: 500px;
-  position: absolute;
-  overflow: scroll;
-  top: 0px;
   left: 140px;
+  position: absolute;
+  top: 0px;
   width: 250px;
   z-index: 1;
+
+  svg {
+    color: #365ed2;
+    height: 10px;
+    width: 10px;
+    margin: 5px;
+  }
 `;
 
-const Item = styled.div`
-  color: black;
-  margin: 5px;
-  padding: 30px;
+const CloseButton = styled.div`
+  border-radius: 10px;
+  margin: 10px;
   text-align: center;
 
   &:hover {
-    background-color: #e9e9e9;
+    background-color: #f7f9fe;
+  }
+`;
+
+const CreateButton = styled.div`
+  border-radius: 10px;
+  color: white;
+  font-family: Noah Bold;
+  margin: 10px;
+  padding: 10px 0;
+  text-align: center;
+  width: calc(100% - 20px);
+  background-color: #365ed3;
+
+  &:hover {
+    background-color: #2145ae;
   }
 `;

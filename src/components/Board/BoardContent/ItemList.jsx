@@ -30,6 +30,7 @@ const ListWrapper = styled.div`
   height: 100%;
 
   > div {
-    height: 100%;
+    height: calc(100% - 50px);
+    overflow: scroll;
   }
 `;

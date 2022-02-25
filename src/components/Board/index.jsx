@@ -19,5 +19,5 @@ const BoardWrapper = styled.div`
   height: 100%;
   position: relative;
   flex-direction: column;
-  width: calc(100% - 200px);
+  width: calc(100% - 150px);
 `;

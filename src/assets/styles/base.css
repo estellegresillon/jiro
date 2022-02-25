@@ -1,10 +1,21 @@
+@font-face {
+  font-family: "Noah";
+  src: local("Noah"), url(../fonts/Noah-Regular.otf) format("woff");
+}
+
+@font-face {
+  font-family: "Noah Bold";
+  src: local("Noah Bold"), url(../fonts/Noah-Bold.otf) format("woff");
+}
+
 body {
   margin: 0;
-  font-family: "Gilroy", sans-serif;
+  font-family: "Noah", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   position: relative;
-  min-height: 100vh;
+  height: 100vh;
+  color: #121b63;
 }
 
 /* Chrome, Safari, Edge, Opera */
