@@ -7,7 +7,7 @@ import { useBoardContext } from "contexts";
 import Column from "./Column";
 
 const Board = () => {
-  const { columns, tickets, updateElements } = useBoardContext();
+  const { columns, updateElements } = useBoardContext();
 
   const [orderedColumns, updateOrderedColumns] = useState([]);
 
@@ -17,25 +17,36 @@ const Board = () => {
     }
 
     if (result.type === "TICKET") {
-      const items = [...tickets];
-      const [reorderedItem] = items.splice(result.source.index, 1);
-      items.splice(result.destination.index, 0, reorderedItem);
+      console.log(result);
+      const source = result.source.droppableId;
+      const destination = result.destination.droppableId;
+      const newBoard = [...columns];
 
-      updateElements(items, result.type);
+      const sourceCol = newBoard.find((column) =>
+        Object.keys(column).includes(source)
+      )[source].tickets;
+
+      const [reorderedItem] = sourceCol.splice(result.source.index, 1);
+      reorderedItem.status = result.destination.droppableId;
+
+      const targetCol = newBoard.find((column) =>
+        Object.keys(column).includes(destination)
+      )[destination].tickets;
+      targetCol.splice(result.destination.index, 0, reorderedItem);
+
+      updateElements(newBoard);
     }
 
     if (result.type === "COLUMN") {
       const items = [...columns];
       const [reorderedItem] = items.splice(result.source.index, 1);
       items.splice(result.destination.index, 0, reorderedItem);
-
       updateOrderedColumns(items);
-      updateElements(items, result.type);
+      updateElements(items);
     }
   };
 
   useEffect(() => {
-    console.log(columns, "cols");
     updateOrderedColumns(columns);
   }, [columns]);
 
@@ -49,14 +60,18 @@ const Board = () => {
                 {...provided.droppableProps}
                 ref={provided.innerRef}
               >
-                {orderedColumns.map((column, index) => (
-                  <Column
-                    index={index}
-                    key={column}
-                    column={column}
-                    tickets={tickets}
-                  />
-                ))}
+                {orderedColumns.map((column, index) => {
+                  const columnName = Object.keys(column)[0];
+
+                  return (
+                    <Column
+                      index={index}
+                      key={columnName}
+                      column={column}
+                      columnName={columnName}
+                    />
+                  );
+                })}
                 {provided.placeholder}
               </ColumnWrapper>
             )}

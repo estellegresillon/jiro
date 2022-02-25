@@ -1,6 +1,6 @@
 import { Draggable } from "react-beautiful-dnd";
 
-const ItemList = ({ index, ticket }) => (
+const Item = ({ index, ticket }) => (
   <Draggable draggableId={ticket.id} index={index}>
     {(provided) => (
       <div
@@ -14,4 +14,4 @@ const ItemList = ({ index, ticket }) => (
   </Draggable>
 );
 
-export default ItemList;
+export default Item;

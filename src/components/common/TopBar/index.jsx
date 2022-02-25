@@ -15,12 +15,12 @@ const TopBar = () => {
 
   return (
     <TopBarWrapper>
-      <div onClick={() => setMenuOpen(true)}>Create</div>
-      {isMenuOpen && <Menu menuRef={ref} onClose={() => setMenuOpen(false)} />}
-      <div onClick={() => createElement("column")}>+Column</div>
       <div>
         <Link to="/">Board</Link>
       </div>
+      <div onClick={() => setMenuOpen(true)}>Create</div>
+      {isMenuOpen && <Menu menuRef={ref} onClose={() => setMenuOpen(false)} />}
+      <div onClick={() => createElement("column")}>+Column</div>
     </TopBarWrapper>
   );
 };

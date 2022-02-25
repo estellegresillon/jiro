@@ -2,16 +2,21 @@ import { Draggable } from "react-beautiful-dnd";
 
 import ItemList from "../ItemList";
 
-const Column = ({ index, column, ...props }) => (
-  <Draggable draggableId={column} index={index}>
+const Column = ({ index, column, columnName, ...props }) => (
+  <Draggable draggableId={columnName} index={index}>
     {(provided, snapshot) => (
       <div
         {...provided.draggableProps}
         {...provided.dragHandleProps}
         ref={provided.innerRef}
       >
-        <div>{column}</div>
-        <ItemList column={column} index={index} {...props} />
+        <div>{columnName}</div>
+        <ItemList
+          column={column}
+          columnName={columnName}
+          index={index}
+          {...props}
+        />
       </div>
     )}
   </Draggable>
