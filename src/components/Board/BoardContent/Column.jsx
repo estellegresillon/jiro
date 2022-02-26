@@ -66,6 +66,10 @@ const ColHeaderWrapper = styled.div`
   svg {
     height: 13px;
     width: 13px;
+
+    &:hover {
+      color: #092578;
+    }
   }
 
   span {

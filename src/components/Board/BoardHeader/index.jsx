@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import IconQuestion from "components/common/IconQuestion";
+import Tooltip from "components/common/Tooltip";
 import { useBoardContext } from "contexts";
 
 const BoardHeader = () => {
@@ -11,13 +13,20 @@ const BoardHeader = () => {
         <CardContent>
           <h1>Sprint #89</h1>
           <ActionWrapper>
-            <div>{canDragColumns ? "Managing Board" : "Manage Board"}</div>
+            <div className="manage-board-text">Manage Board</div>
             <ToggleButton
               onClick={() => setCanDragColumns(!canDragColumns)}
               $canDragColumns={canDragColumns}
             >
               <div className="toggle-button" />
             </ToggleButton>
+            <Tooltip icon={<IconQuestion />}>
+              <ul>
+                <li>Move columns</li>
+                <li>Delete columns</li>
+                <li>Delete tickets</li>
+              </ul>
+            </Tooltip>
           </ActionWrapper>
         </CardContent>
       </HeaderCard>
@@ -65,8 +74,30 @@ const CardContent = styled.div`
 const ActionWrapper = styled.div`
   align-items: center;
   display: flex;
-  justify-content: space-between;
-  width: 175px;
+
+  .manage-board-text {
+    width: 120px;
+  }
+
+  svg {
+    color: #365ed3;
+    cursor: pointer;
+    height: 15px;
+    margin-left: 8px;
+    width: 15px;
+
+    &:hover {
+      color: #092578;
+    }
+  }
+
+  ul {
+    padding: 0;
+  }
+
+  li {
+    margin: 15px;
+  }
 `;
 
 const ToggleButton = styled.div`
@@ -81,11 +112,11 @@ const ToggleButton = styled.div`
 
   .toggle-button {
     background-color: ${({ $canDragColumns }) =>
-      $canDragColumns ? "#59b1fc" : "#f6f8ff"};
+      $canDragColumns ? "#365ed3" : "white"};
     border-radius: 50%;
     height: 20px;
     margin: 3px;
-    margin-left: ${({ $canDragColumns }) => ($canDragColumns ? "25px" : "3px")};
+    margin-left: ${({ $canDragColumns }) => ($canDragColumns ? "26px" : "3px")};
     transition: 1s all ease;
     width: 20px;
   }

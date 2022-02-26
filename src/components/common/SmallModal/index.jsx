@@ -50,6 +50,10 @@ const SmallModalWrapper = styled.div`
     height: 10px;
     width: 10px;
     margin: 5px;
+
+    &:hover {
+      color: #092578;
+    }
   }
 `;
 
@@ -57,10 +61,6 @@ const CloseButton = styled.div`
   border-radius: 10px;
   margin: 10px;
   text-align: center;
-
-  &:hover {
-    background-color: #f7f9fe;
-  }
 `;
 
 const CreateButton = styled.div`
@@ -74,6 +74,6 @@ const CreateButton = styled.div`
   background-color: #365ed3;
 
   &:hover {
-    background-color: #2145ae;
+    background-color: #092578;
   }
 `;

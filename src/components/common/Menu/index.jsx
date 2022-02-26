@@ -3,26 +3,37 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import IconPlus from "components/common/IconPlus";
+import ProjectsModal from "components/common/ProjectsModal";
+import SmallModal from "components/common/SmallModal";
 import { useBoardContext } from "contexts";
-
-import SmallModal from "../SmallModal";
 
 const Menu = () => {
   const { createElement } = useBoardContext();
 
-  const [isCreateTicketOpen, setCreateTicketOpen] = useState(false);
   const [isCreateColumnOpen, setCreateColumnOpen] = useState(false);
+  const [isCreateTicketOpen, setCreateTicketOpen] = useState(false);
+  const [isOtherProjectsOpen, setOtherProjectsOpen] = useState(false);
+
+  const handleCreateColumnOpen = (boolean) => {
+    setCreateColumnOpen(boolean);
+    if (boolean) {
+      setCreateTicketOpen(false);
+      setOtherProjectsOpen(false);
+    }
+  };
 
   const handleCreateTicketOpen = (boolean) => {
     setCreateTicketOpen(boolean);
     if (boolean) {
       setCreateColumnOpen(false);
+      setOtherProjectsOpen(false);
     }
   };
 
-  const handleCreateColumnOpen = (boolean) => {
-    setCreateColumnOpen(boolean);
+  const handleOtherProjectsOpen = (boolean) => {
+    setOtherProjectsOpen(boolean);
     if (boolean) {
+      setCreateColumnOpen(false);
       setCreateTicketOpen(false);
     }
   };
@@ -45,6 +56,7 @@ const Menu = () => {
         </ItemContent>
         {isCreateTicketOpen && (
           <SmallModal
+            hasButton
             name="ticket"
             onValidate={createElement}
             onClose={() => handleCreateTicketOpen(false)}
@@ -57,10 +69,19 @@ const Menu = () => {
         </ItemContent>
         {isCreateColumnOpen && (
           <SmallModal
+            hasButton
             name="column"
             onValidate={createElement}
             onClose={() => handleCreateColumnOpen(false)}
           />
+        )}
+      </Item>
+      <Item>
+        <ItemContent onClick={() => handleOtherProjectsOpen(true)}>
+          Other projects
+        </ItemContent>
+        {isOtherProjectsOpen && (
+          <ProjectsModal onClose={() => handleOtherProjectsOpen(false)} />
         )}
       </Item>
     </MenuWrapper>
@@ -106,7 +127,6 @@ const Item = styled.div`
 
   &:hover {
     background-color: #f7f9fe;
-    color: #2145ae;
   }
 `;
 
