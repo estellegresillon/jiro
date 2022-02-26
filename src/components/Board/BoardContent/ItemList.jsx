@@ -6,7 +6,7 @@ import Item from "./Item";
 const ItemList = ({ canDragColumns, column, columnName }) => (
   <ListWrapper>
     <Droppable droppableId={columnName} type="TICKET">
-      {(provided, snpashot) => (
+      {(provided) => (
         <div {...provided.droppableProps} ref={provided.innerRef}>
           {column[columnName].tickets.map((ticket, index) => (
             <Item
@@ -31,6 +31,12 @@ const ListWrapper = styled.div`
 
   > div {
     height: calc(100% - 50px);
+    -ms-overflow-style: none;
     overflow: scroll;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 `;

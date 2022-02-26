@@ -23,7 +23,7 @@ const TooltipWrapper = styled.div`
     background-color: white;
     box-shadow: 0 1px 40px 0 rgb(69 129 192 / 10%);
     display: none;
-    padding: 10px 10px 10px 20px;
+    padding: 20px;
     position: absolute;
     top: 25px;
     white-space: nowrap;

@@ -21,11 +21,7 @@ const BoardHeader = () => {
               <div className="toggle-button" />
             </ToggleButton>
             <Tooltip icon={<IconQuestion />}>
-              <ul>
-                <li>Move columns</li>
-                <li>Delete columns</li>
-                <li>Delete tickets</li>
-              </ul>
+              <span>Permits columns and tickets removal</span>
             </Tooltip>
           </ActionWrapper>
         </CardContent>
@@ -89,14 +85,6 @@ const ActionWrapper = styled.div`
     &:hover {
       color: #092578;
     }
-  }
-
-  ul {
-    padding: 0;
-  }
-
-  li {
-    margin: 15px;
   }
 `;
 

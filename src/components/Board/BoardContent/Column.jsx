@@ -2,7 +2,6 @@ import { Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
 import IconClose from "components/common/IconClose";
-import IconGrip from "components/common/IconGrip";
 import { useBoardContext } from "contexts";
 
 import ItemList from "./ItemList";
@@ -11,12 +10,8 @@ const Column = ({ index, canDragColumns, column, columnName, ...props }) => {
   const { removeItem } = useBoardContext();
 
   return (
-    <Draggable
-      isDragDisabled={!canDragColumns}
-      draggableId={columnName}
-      index={index}
-    >
-      {(provided, snapshot) => (
+    <Draggable draggableId={columnName} index={index}>
+      {(provided) => (
         <div
           {...provided.draggableProps}
           {...provided.dragHandleProps}
@@ -31,7 +26,6 @@ const Column = ({ index, canDragColumns, column, columnName, ...props }) => {
                     <IconClose />
                   </span>
                 )}
-                <IconGrip />
               </ActionsWrapper>
             )}
           </ColHeaderWrapper>
@@ -59,7 +53,7 @@ const ColHeaderWrapper = styled.div`
   height: 40px;
   justify-content: space-between;
   margin-bottom: -8px;
-  padding: 10px 20px 0 20px;
+  padding: 10px 15px 0 20px;
   text-transform: uppercase;
   white-space: nowrap;
 
@@ -80,7 +74,6 @@ const ColHeaderWrapper = styled.div`
     font-size: 8px;
     height: 20px;
     justify-content: center;
-    margin-right: 10px;
     width: 20px;
 
     svg {
