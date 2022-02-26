@@ -8,11 +8,7 @@ const Item = ({ canDragColumns, columnName, index, ticket }) => {
   const { removeItem } = useBoardContext();
 
   return (
-    <Draggable
-      draggableId={ticket.id}
-      index={index}
-      isDragDisabled={canDragColumns}
-    >
+    <Draggable draggableId={ticket.id} index={index}>
       {(provided) => (
         <ItemWrapper
           {...provided.draggableProps}

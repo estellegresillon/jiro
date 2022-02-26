@@ -6,25 +6,12 @@ export const DEMO_STATE = [
       tickets: [
         createNewItem({
           status: "backlog",
-          title:
-            "Discipline is choosing between what you want now and what you want most.",
-        }),
-        createNewItem({
-          status: "backlog",
-          title: "Don’t settle for less just because it’s available.",
+          title: "All things are difficult before they are easy.",
         }),
         createNewItem({
           status: "backlog",
           title:
             "The greatest rewards come from working on something that nobody has a name for. If you possibly can, work where there are no words for what you do.",
-        }),
-        createNewItem({
-          status: "backlog",
-          title: "Man will become better if you show him what he is like.",
-        }),
-        createNewItem({
-          status: "backlog",
-          title: "To be wealthy, accumulate what money can’t buy.",
         }),
       ],
     },
@@ -35,12 +22,16 @@ export const DEMO_STATE = [
         createNewItem({
           status: "ongoing",
           title:
-            "The value of a thing sometimes lies not in one attains with it, but in one pays for it - what it cost us.",
+            "You are only as young as the last time you changed your mind.",
+        }),
+        createNewItem({
+          status: "ongoing",
+          title: "To be wealthy, accumulate what money can’t buy.",
         }),
         createNewItem({
           status: "ongoing",
           title:
-            "You are only as young as the last time you changed your mind.",
+            "Discipline is choosing between what you want now and what you want most.",
         }),
       ],
     },
@@ -51,16 +42,16 @@ export const DEMO_STATE = [
       tickets: [
         createNewItem({
           status: "qa",
+          title: "The greatest friend of the soul is the unknown.",
+        }),
+        createNewItem({
+          status: "qa",
           title:
             "Take up one idea. Make that one idea your life — think of it, dream of it, live on that idea. Let the brain, muscles, nerves, every part of your body, be full of that idea, and just leave every other idea alone.",
         }),
         createNewItem({
           status: "qa",
-          title: "All things are difficult before they are easy.",
-        }),
-        createNewItem({
-          status: "qa",
-          title: "The greatest friend of the soul is the unknown.",
+          title: "Don’t settle for less just because it’s available.",
         }),
       ],
     },
@@ -109,6 +100,18 @@ export const DEMO_STATE = [
           status: "done",
           title:
             "Danger lurk in all systems. Systems incorporate the unexamined beliefs of their creators. Adopt a system, accept its beliefs, and you help strengthen the resistance to change.",
+        }),
+        createNewItem({
+          status: "done",
+          title: "Man will become better if you show him what he is like.",
+        }),
+        createNewItem({
+          status: "done",
+          title: "Dune books are the best ever written.",
+        }),
+        createNewItem({
+          status: "done",
+          title: "FromSoftware games are the best ever made.",
         }),
       ],
     },

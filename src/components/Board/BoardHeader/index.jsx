@@ -11,7 +11,7 @@ const BoardHeader = () => {
     <BoardHeaderWrapper>
       <HeaderCard>
         <CardContent>
-          <h1>Sprint #89</h1>
+          <h1>Sprint #1337 : Book quotes</h1>
           <ActionWrapper>
             <div className="manage-board-text">Manage Board</div>
             <ToggleButton
@@ -21,7 +21,13 @@ const BoardHeader = () => {
               <div className="toggle-button" />
             </ToggleButton>
             <Tooltip icon={<IconQuestion />}>
-              <span>Permits columns and tickets removal</span>
+              <div style={{ marginBottom: "10px" }}>
+                Permits columns and tickets removal.
+              </div>
+              <div style={{ marginBottom: "10px" }}>
+                Changes are saved automatically.
+              </div>
+              <div>Backlog can't be deleted or moved.</div>
             </Tooltip>
           </ActionWrapper>
         </CardContent>
@@ -105,7 +111,7 @@ const ToggleButton = styled.div`
     height: 20px;
     margin: 3px;
     margin-left: ${({ $canDragColumns }) => ($canDragColumns ? "26px" : "3px")};
-    transition: 1s all ease;
+    transition: 0.5s all ease;
     width: 20px;
   }
 `;

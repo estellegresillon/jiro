@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 
 import IconClose from "components/common/IconClose";
@@ -8,11 +8,31 @@ import Input from "../Input";
 const SmallModal = ({ name, onValidate, onClose }) => {
   const [value, setValue] = useState("");
 
-  const onClick = () => {
+  const onClick = useCallback(() => {
+    if (!value) {
+      return;
+    }
+
     onValidate(name, value);
     setValue("");
     onClose();
-  };
+  }, [name, onClose, onValidate, value]);
+
+  const handleKeyDown = useCallback(
+    (e) => {
+      const key = e.key;
+
+      if (key === "Enter") {
+        onClick();
+      }
+    },
+    [onClick]
+  );
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handleKeyDown]);
 
   return (
     <SmallModalWrapper>

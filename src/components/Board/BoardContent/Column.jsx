@@ -10,7 +10,11 @@ const Column = ({ index, canDragColumns, column, columnName, ...props }) => {
   const { removeItem } = useBoardContext();
 
   return (
-    <Draggable draggableId={columnName} index={index}>
+    <Draggable
+      isDragDisabled={columnName === "backlog"}
+      draggableId={columnName}
+      index={index}
+    >
       {(provided) => (
         <div
           {...provided.draggableProps}
