@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import IconPlus from "components/common/IconPlus";
@@ -41,10 +40,18 @@ const Menu = () => {
   return (
     <MenuWrapper>
       <Item>
+        <ItemContent onClick={() => handleOtherProjectsOpen(true)}>
+          Other projects
+        </ItemContent>
+        {isOtherProjectsOpen && (
+          <ProjectsModal onClose={() => handleOtherProjectsOpen(false)} />
+        )}
+      </Item>
+      {/* <Item>
         <ItemContent>
           <Link to="/">Jiro</Link>
         </ItemContent>
-      </Item>
+      </Item> */}
       {/* <Item>
         <ButtonNewSprint>
           <IconPlus /> New Sprint
@@ -74,14 +81,6 @@ const Menu = () => {
             onValidate={createElement}
             onClose={() => handleCreateColumnOpen(false)}
           />
-        )}
-      </Item>
-      <Item>
-        <ItemContent onClick={() => handleOtherProjectsOpen(true)}>
-          Other projects
-        </ItemContent>
-        {isOtherProjectsOpen && (
-          <ProjectsModal onClose={() => handleOtherProjectsOpen(false)} />
         )}
       </Item>
     </MenuWrapper>

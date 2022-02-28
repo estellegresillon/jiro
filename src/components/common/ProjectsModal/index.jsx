@@ -4,6 +4,14 @@ import IconClose from "components/common/IconClose";
 
 const PROJECTS = [
   {
+    link: "https://elden.estellegresillon.fr",
+    name: "Elden Delivery",
+  },
+  {
+    link: "https://flow.estellegresillon.fr",
+    name: "Flow",
+  },
+  {
     link: "https://motus.estellegresillon.fr",
     name: "Wordle",
   },

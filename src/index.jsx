@@ -5,9 +5,11 @@ import styled from "styled-components";
 
 import "assets/styles/base.css";
 import Menu from "components/common/Menu";
+import VisitOnDesktop from "components/common/VisitOnDesktop";
 import Board from "components/Board";
 import Ticket from "components/Ticket";
 import { BoardProvider } from "contexts";
+import { useWindowSize } from "hooks/useWindowSize";
 
 const AppWrapper = styled.div`
   align-items: center;
@@ -27,19 +29,28 @@ const AppWrapper = styled.div`
   width: 100%;
 `;
 
-const App = () => (
-  <AppWrapper>
-    <BrowserRouter>
-      <BoardProvider>
-        <Menu />
-        <Routes>
-          <Route exact path="/" element={<Board />} />
-          <Route exact path="/ticket:id" element={<Ticket />} />
-        </Routes>
-      </BoardProvider>
-    </BrowserRouter>
-  </AppWrapper>
-);
+const App = () => {
+  const { width } = useWindowSize();
+  const isMobile = width < 520;
+
+  return (
+    <AppWrapper>
+      {isMobile ? (
+        <VisitOnDesktop />
+      ) : (
+        <BrowserRouter>
+          <BoardProvider>
+            <Menu />
+            <Routes>
+              <Route exact path="/" element={<Board />} />
+              <Route exact path="/ticket:id" element={<Ticket />} />
+            </Routes>
+          </BoardProvider>
+        </BrowserRouter>
+      )}
+    </AppWrapper>
+  );
+};
 
 ReactDOM.render(
   <React.StrictMode>
